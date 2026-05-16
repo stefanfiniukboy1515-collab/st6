@@ -1,0 +1,136 @@
+body {
+    background-color: #12141c; 
+    /* Фішка: Створення футуристичної фонової сітки, щоб прибрати суцільний чорний колір */
+    background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size: 20px 20px; /* Розмір клітинок сітки */
+    color: #f5f5f5;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    margin: 0;
+    padding: 60px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh; /* Розтягує фон на всю висоту екрану */
+}
+
+/* Сесія: Головний контейнер-обгортка для карток */
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 35px; /* Збільшений відступ між прямокутниками */
+    max-width: 850px;
+    width: 100%;
+}
+
+/* Сесія: Ефект переливання головного тексту (заголовка) */
+.gradient-text {
+    font-size: 3.5rem; /* Збільшений розмір тексту */
+    font-weight: 900;
+    text-align: center;
+    margin-bottom: 50px;
+    text-transform: uppercase;
+    letter-spacing: 4px; /* Відстань між літерами */
+    
+    background: linear-gradient(45deg, #000000, #ff6a00, #ff0000, #000000);
+    background-size: 400% 400%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    
+    animation: textFluid 6s ease infinite;
+    /* Фішка безпеки: підказка браузеру оптимізувати зміну фону без підвисань */
+    will-change: background-position; 
+}
+
+/* Сесія: Налаштування прямокутних ігрових платформ */
+.animated-card {
+    /* Фішка: Ефект матового скла (Glassmorphism) */
+    background: rgba(30, 34, 45, 0.7);
+    backdrop-filter: blur(10px); /* Розмиття фону за карткою */
+    -webkit-backdrop-filter: blur(10px);
+    
+    border: 1px solid rgba(255, 106, 0, 0.15); /* Тонка неонова рамка */
+    border-radius: 16px; /* Більш округлі кути */
+    padding: 30px; /* Внутрішні відступи від тексту до країв */
+    font-size: 1.15rem;
+    line-height: 1.7; /* Інтервал між рядками */
+    color: #e2e8f0;
+    
+    /* Базова тінь під прямокутником */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), 
+                inset 0 1px 0 rgba(255, 255, 255, 0.05); /* Внутрішній блик зверху */
+    
+    /* Фішка: Плавний перехід для ВСІХ властивостей при взаємодії */
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    
+    animation: platformPulse 5s ease-in-out infinite;
+    /* Фішка безпеки: анімація стає плавною та не "морозить" інтерфейс */
+    will-change: transform, box-shadow; 
+}
+
+/* Сесія: Виділені ключові слова на початку кожного прямокутника */
+.highlight {
+    font-weight: 800;
+    font-size: 1.25rem;
+    letter-spacing: 0.5px;
+    background: linear-gradient(90deg, #000000, #ff5100, #cc0000, #000000);
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: textFluid 5s ease infinite;
+    display: inline; /* Скасування будь-яких абзаців та переносів */
+    margin-right: 6px;
+    will-change: background-position;
+}
+
+/* Сесія: Інтерактивний ефект під час наведення мишки на прямокутник */
+.animated-card:hover {
+    border-color: rgba(255, 81, 0, 0.6); /* Рамка стає яскравішою */
+    transform: translateY(-5px) scale(1.015); /* Картка плавно підстрибує вгору */
+    /* Тінь стає насиченішою, створюючи ефект відриву від поверхні */
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 
+                0 0 20px rgba(255, 106, 0, 0.15); 
+    cursor: pointer;
+}
+
+/* Сесія: Логіка математичного прорахунку руху хвиль кольору тексту */
+@keyframes textFluid {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Сесія: Логіка м'якого пульсування прямокутних платформ (без лагів) */
+@keyframes platformPulse {
+    0% {
+        transform: translateY(0) scale(1);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    }
+    50% {
+        transform: translateY(-2px) scale(1.005); /* Легке підняття блоку */
+        /* М'яке збільшення зони підсвічування */
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), 0 0 15px rgba(255, 106, 0, 0.08);
+    }
+    100% {
+        transform: translateY(0) scale(1);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    }
+}
+.cta-button {
+    color: #cc5200; 
+    text-decoration: none;
+    font-weight: bold;
+    padding: 10px 25px;
+    border-radius: 8px;
+    margin-top: 15px;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.cta-button {
+    background-image: linear-gradient(45deg, #ff4e00, #ec9f05);
+    box-shadow: 0 0 20px 5px rgba(255, 0, 0, 0.8); 
+    border: 2px solid #ff4e00;
+}
